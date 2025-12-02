@@ -1,86 +1,176 @@
-# Luma XIP Protocol
+Luma XIP Protocol — Technical Specification (Public Reference)
 
-**Luma XIP (Cross-Infrastructure Protocol)** is the reference specification for how
-Luma Core represents **audit receipts, ledger events, identity claims and
-offline/online continuity** across CBDCs, XRPL/Ripple-based settlement,
-traditional banking rails, and local ledgers.
 
-This repository defines:
 
-- Canonical **JSON schemas** for XIP messages  
-- The **XIP-0001 base standard** for audit receipts  
-- Conventions for **ISO 20022 alignment**  
-- Hooks for **XRPL / Ripple** and national CBDC systems  
-- Requirements for **hash-chained, tamper-evident receipts**  
-- The **adaptive communications layer** (offline mesh + satellite + online)  
 
-> ⚠️ **Patent & Licensing Notice**  
-> The Luma XIP Protocol and associated methods are covered by patent
-> applications owned by **Daniel O’Connor trading as Luma Connect**.  
-> Publication of this specification **does not grant implementation rights**.  
-> Any commercial or governmental implementation **requires a written licence**
-> from the patent holder.
 
----
 
-## Status
+XIP (Cross-Integrity Protocol) is the sovereign, offline-first integrity layer used across Luma Core.
+It defines how audit receipts, identity claims, ledger events, and cross-jurisdiction workflows are represented, verified, transmitted, and reconciled.
 
-- **Specification:** `XIP-0001` (this repo)  
-- **Version:** `1.0.0-alpha`  
-- **Maturity:** Draft – stable enough for pilot integrations with
-  governments, CBDCs, XRPL/Ripple and banking partners.
+XIP is designed for environments where governments, financial institutions, regulated industries, and disconnected networks must share a universal, tamper-evident state transition model, even when offline.
 
----
+This repository contains the public reference specification.
+Production engine code is private.
 
-## Design goals
+📌 Purpose of XIP
 
-1. **Receipts by default**  
-   Every meaningful workflow (payment, approval, identity check, tax event,
-   prescription, inspection, case update) emits a **verifiable receipt**.
+XIP solves the global problem of fragmented integrity:
 
-2. **Hash-chained history**  
-   Receipts are **hash-linked** into a chronological chain, providing a local,
-   tamper-evident history that can be anchored to public or national ledgers.
+Centralised logs can be altered.
 
-3. **ISO 20022 aligned**  
-   Where applicable, XIP fields map cleanly to ISO 20022 concepts so that
-   central banks and banks do not need custom translation layers.
+Blockchains cannot operate offline.
 
-4. **XRPL / Ripple & CBDC friendly**  
-   XIP events can be mirrored to XRPL, Ripple-based infrastructure and CBDCs
-   as **ledger-native artefacts**, allowing transparent auditability.
+Cross-border systems cannot agree on audit history.
 
-5. **Offline-first**  
-   XIP is designed to work in **offline environments** (mesh, local nodes,
-   devices in the field) and later sync to national or global infrastructure.
+CBDCs, XRPL, banks, and government systems do not share a common receipt layer.
 
-6. **Privacy by design**  
-   Personally identifiable data can be **kept off-ledger**, with receipts
-   containing hashes, references, or zero-knowledge proofs instead.
+XIP provides a universal, cryptographically-verifiable audit trail that works:
 
----
+online
 
-## Files
+offline
 
-- `XIP-0001.md` – Base standard for XIP audit receipts.  
-- `schema/xip-receipt-v1.json` – JSON Schema for receipts.  
-- `schema/xip-ledger-event-v1.json` – Ledger event envelope.  
-- `schema/xip-identity-claim-v1.json` – Identity claim wrapper.  
-- `examples/receipt-example-minimal.json` – Minimal example for testing.  
-- `examples/gov-audit-flow.md` – Example flow for a government deployment.  
+mesh
 
----
+satellite
 
-## Licence & IP
+inter-jurisdiction
 
-See **LICENSE.md** for terms.
+ledger or non-ledger environments
 
-**Short version:**  
-- You may **read** this spec and discuss it.  
-- You may **not** deploy a commercial or governmental implementation without a
-  written licence from **Daniel O’Connor / Luma Connect**.  
-- Implementations are expected to emit **Luma-compatible audit receipts**
-  to ensure cross-jurisdiction interoperability.
+📄 Specification Status
+Component	Status
+XIP-0001 (Base Receipt Standard)	Draft – Stable
+JSON Schemas	Stable
+Reference Examples	Included
+Version	1.0.0-alpha
 
-For licensing enquiries:  
-`contact@` (insert your preferred address or web form here).
+Stable for pilot integrations with:
+
+governments
+
+central banks / CBDCs
+
+XRPL & Ripple infrastructure
+
+commercial banking partners
+
+regulated industry hubs
+
+🎯 Core Design Principles
+1. Receipts-by-Default
+
+Every workflow—payments, identity checks, prescriptions, inspections, tax events—emits a verifiable, hash-linked, jurisdiction-policed receipt.
+
+2. Hash-Linked Integrity
+
+Receipts form a local tamper-evident chain:
+
+cannot be altered retroactively
+
+can be anchored to XRPL, CBDCs, or government ledgers
+
+preserves full state history even offline
+
+3. ISO 20022 Alignment
+
+Where applicable, XIP fields map cleanly to ISO 20022 primitives, enabling:
+
+banks and CBDCs to integrate without translation layers
+
+jurisdiction-agnostic interoperability
+
+4. XRPL / Ripple / CBDC Ready
+
+Receipts may be optionally mirrored to:
+
+XRPL
+
+Ripple private ledgers
+
+national CBDC systems
+
+Allowing ledger-native auditability without forcing blockchain dependence.
+
+5. Offline-First Architecture
+
+XIP supports:
+
+mesh
+
+BLE/WiFi direct
+
+offline queues
+
+satellite (DTN)
+
+inter-jurisdiction sync
+
+All receipts are fully verifiable without internet.
+
+6. Privacy-Preserving by Design
+
+Receipts support:
+
+hashed identifiers
+
+salted references
+
+zero-knowledge proof fields
+
+off-ledger personal data
+
+📦 Repository Contents
+XIP-0001.md                   # Base specification
+schema/
+   ├── xip-receipt-v1.json
+   ├── xip-ledger-event-v1.json
+   └── xip-identity-claim-v1.json
+examples/
+   ├── receipt-example-minimal.json
+   └── gov-audit-flow.md
+LICENSE.md
+VERSION
+README.md
+
+🔐 Licensing & Patent Notice
+
+The XIP Protocol and associated methods are protected by patent applications owned by:
+
+Daniel O’Connor
+Luma Connect
+
+Publication of this specification does not grant implementation rights.
+
+You MAY:
+
+read and study the spec
+
+reference it academically
+
+design conceptual architectures
+
+You MAY NOT:
+
+implement XIP commercially
+
+integrate into a government system
+
+create derivative commercial protocols
+
+build competing sovereign-audit technology
+
+without a written licence agreement.
+
+Licensing enquiries:
+
+www.luma-connect.app
+
+🧭 Summary
+
+XIP is the integrity backbone of Luma Core:
+a universal, sovereign audit protocol bridging government, finance, CBDCs, and offline-first infrastructure.
+
+This repo provides the public reference standard.
+All production implementations remain private and licensed.
