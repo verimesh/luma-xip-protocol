@@ -160,7 +160,16 @@ The protocol has undergone multi-environment simulation covering:
 These tests mirror defence-grade infrastructure evaluations, ensuring XIP operates reliably under
 nation-state scale conditions and prolonged outages.
 
----
+### 10.6 Architectural Testing Advantage
+
+XIP’s offline-first architecture and deterministic event model allow the protocol to be validated
+across multiple network states (offline, mesh, partial connectivity, high-latency satellite
+simulation, and full online sync) without specialised laboratory infrastructure.
+
+This capability provides significant cost and time advantages normally unavailable to emerging
+sovereign digital infrastructure projects. The internal testing mechanism is proprietary to
+the Luma Core project and not disclosed publicly.
+
 
 ## 11. Diagrams (Placeholders)
 
