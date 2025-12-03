@@ -1,3 +1,12 @@
+![Status](https://img.shields.io/badge/status-stable-blue)
+![Spec Version](https://img.shields.io/badge/XIP-v1.0.0-green)
+![License](https://img.shields.io/badge/license-proprietary-red)
+
+**Repository Status:**  
+This is the authoritative standard for the XIP Protocol (Luma Core).  
+For the reference demo implementation, see:  
+https://github.com/stroanroad/luma-core-demo
+
 # XIP Protocol — Cross-Hub Audit & Offline Continuity Standard
 
 **Version:** v1.0.0-spec-baseline  
