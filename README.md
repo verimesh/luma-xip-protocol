@@ -5,7 +5,7 @@
 **Repository Status:**  
 This is the authoritative standard for the XIP Protocol (Luma Core).  
 For the reference demo implementation, see:  
-https://github.com/stroanroad/luma-core-demo
+https://github.com/verimesh/luma-core-demo
 
 # XIP Protocol — Cross-Hub Audit & Offline Continuity Standard
 
@@ -127,15 +127,15 @@ It satisfies regulatory requirements across finance, healthcare, supply chains, 
 ## 9. Reference Implementations
 
 - **Luma Core Demo (Ultraslim):**  
-  https://dancing-narwhal-bb57b2.netlify.app
+  https://luma-core-demo.netlify.app
 
 
 
 - **Demo Source Code:**  
-  https://github.com/stroanroad/luma-core-demo
+  https://github.com/verimesh/luma-core-demo
 
 - **Protocol Source:**  
-  https://github.com/stroanroad/luma-xip-protocol
+  https://github.com/verimesh/luma-xip-protocol
 
 ---
 
@@ -206,4 +206,4 @@ under the Luma Core licensing model.
 ## 13. Contact
 
 For licensing, technical review, or sovereign deployment discussions:  
-https://luma-connect.app
+https://verimesh.net
