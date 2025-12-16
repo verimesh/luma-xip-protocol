@@ -45,7 +45,7 @@ Included with this release is the **Luma Core Demo**, a PWA showcasing:
 - Minimal UI for testing and validation  
 
 Demo source:  
-https://github.com/stroanroad/luma-core-demo
+https://github.com/verimesh/luma-core-demo
 
 ---
 
