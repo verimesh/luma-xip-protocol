@@ -133,6 +133,6 @@ This ensures:
 ---
 
 ## 8. Contact  
-**Official Site:** https://luma-connect.app  
-**Protocol Repository:** https://github.com/stroanroad/luma-xip-protocol  
-**Demo Repository:** https://github.com/stroanroad/luma-core-demo  
+**Official Site:** https://verimesh.net  
+**Protocol Repository:** https://github.com/verimesh/luma-xip-protocol  
+**Demo Repository:** https://github.com/verimesh/luma-core-demo  
