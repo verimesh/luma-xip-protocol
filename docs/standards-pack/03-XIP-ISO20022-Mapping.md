@@ -1,101 +1,95 @@
-Yes — this is the perfect moment to polish it, and we can add Ripple/XRPL cleanly without contaminating the ISO doc.
-What we’ll do is tighten language, fix formatting, and add a short, professional XRPL reference section that regulators won’t object to.
+# XIP Protocol — ISO 20022 Mapping
+**Version:** v1.0.1  
+**Document:** 03-XIP-ISO20022-Mapping  
+**Status:** Released
 
-Below is a drop-in, polished replacement you can paste straight over the file.
+---
 
-XIP Protocol — ISO 20022 Mapping
+## 1. Overview
 
-Version: v1.0.1
-Document: 03-XIP-ISO20022-Mapping
-Status: Released
-
-1. Overview
-
-This document defines how XIP (eXtensible Integrity Protocol) receipts map to ISO 20022 financial message structures for regulated and sovereign financial environments.
+This document defines how **XIP (eXtensible Integrity Protocol)** receipts map to **ISO 20022** financial message structures for regulated, sovereign, and institutional environments.
 
 The mapping enables:
 
-CBDC and stablecoin audit integration
+- Regulator-ready transaction exports  
+- CBDC and regulated stablecoin audit support  
+- Offline-to-online financial reconciliation  
+- XRPL and distributed ledger settlement evidence  
+- Government and institutional financial oversight  
 
-ISO-compliant transaction reporting
+XIP integrates cleanly with ISO 20022 due to its **deterministic receipt format**, **hash-chained audit model**, and **zero-knowledge metadata design**.
 
-Regulator-ready exports
+---
 
-XRPL and distributed ledger settlement evidence
+## 2. Role of ISO 20022
 
-Government and institutional financial oversight
+ISO 20022 is the global standard for financial messaging and is used by:
 
-XIP integrates cleanly with ISO 20022 due to its deterministic receipt structure, hash-chained audit model, and zero-knowledge metadata design.
+- SWIFT  
+- SEPA  
+- Central banks  
+- Payment service providers  
+- Financial regulators  
+- Clearing and settlement networks  
 
-2. Why ISO 20022
+By supporting ISO 20022 exports, XIP allows institutions to:
 
-ISO 20022 is the global standard used by:
+- Interoperate with existing banking rails  
+- Audit offline financial events after reconnection  
+- Integrate XIP into national payment infrastructures  
+- Maintain regulatory continuity during outages or degraded connectivity  
 
-SWIFT
+---
 
-SEPA
+## 3. Architectural Positioning
 
-Central banks
+XIP **does not replace** ISO 20022.
 
-Payment service providers
+Instead, XIP operates as a **cryptographic audit and integrity layer**, while ISO 20022 remains the **semantic and transport messaging standard**.
 
-Financial regulators
+Each XIP receipt is embedded inside ISO-compliant message envelopes (`MX` messages) using the standard **`SplmtryData`** extension mechanism.
 
-Settlement and clearing networks
+This ensures:
+- Zero disruption to existing infrastructure  
+- Full backward compatibility  
+- Clear separation of concerns  
 
-Cross-border payment infrastructures
+---
 
-By supporting ISO 20022 exports, XIP allows governments and institutions to:
+## 4. Mapping Scope
 
-Interoperate with existing banking rails
+XIP receipts may be exported into ISO 20022 message families covering:
 
-Audit offline transactions after reconnection
+- Payments  
+- Remittances  
+- CBDC and stablecoin movements  
+- Merchant transactions  
+- Invoice lifecycle events  
+- Government disbursements  
+- Regulatory and supervisory reporting  
 
-Integrate XIP into national payment systems
+---
 
-Maintain regulatory continuity during network disruption
+## 5. Core Field Mapping
 
-3. Architectural Positioning
+| XIP Field | ISO 20022 Element | Notes |
+|---------|------------------|------|
+| `timestamp` | `GrpHdr/CreDtTm` | UTC timestamp |
+| `hub_id` | `AppHdr/MsgDefIdr` | Application or hub domain |
+| `device_id` | `InitgPty/Id/OrgId/Othr/Id` | Non-personal device identifier |
+| `event` | `Document/*` | Message-specific payload |
+| `prev_hash` | `SplmtryData/Envlp/XIPPrevHash` | Hash-chain continuity |
+| `signature` | `SplmtryData/Envlp/XIPSignature` | Cryptographic signature |
+| `ledger_ref` | `SplmtryData/Envlp/XIPLedgerRef` | Optional ledger reference |
+| `version` | `AppHdr/Fr` or `SplmtryData` | XIP protocol version |
 
-XIP does not replace ISO 20022.
+All XIP-specific data is contained within **`SplmtryData`**, leaving core financial semantics untouched.
 
-Instead, each XIP receipt is embedded as verifiable audit data inside ISO-compliant message envelopes (MX messages), preserving full compatibility with existing financial infrastructure.
+---
 
-XIP acts as a deterministic audit layer, while ISO 20022 remains the transport and semantic messaging standard.
+## 6. Example — Payment Event (`pacs.008`)
 
-4. High-Level Mapping Categories
-
-XIP receipts may be mapped to ISO 20022 message families covering:
-
-Payments
-
-Remittances
-
-CBDC and stablecoin movements
-
-Merchant transactions
-
-Invoice lifecycle events
-
-Government disbursements
-
-Regulatory and supervisory reporting
-
-5. Field Mapping Table
-5.1 Core Fields
-XIP Field	ISO 20022 Element	Notes
-timestamp	GrpHdr/CreDtTm	UTC timestamp
-hub_id	AppHdr/MsgDefIdr	Application or hub domain
-device_id	InitgPty/Id/OrgId/Othr/Id	Non-personal device identifier
-event	Document/*	Message-specific payload
-prev_hash	SplmtryData/Envlp/XIPPrevHash	Hash-chain audit link
-signature	SplmtryData/Envlp/XIPSignature	Cryptographic signature
-ledger_ref	SplmtryData/Envlp/XIPLedgerRef	Optional XRPL / CBDC reference
-version	AppHdr/Fr or SplmtryData	XIP protocol version
-
-All XIP-specific fields are placed inside SplmtryData, ensuring zero impact on core financial semantics.
-
-6. Message Example — Payment Event (pacs.008)
+```xml
 <FIToFICstmrCdtTrf>
   <GrpHdr>
     <CreDtTm>2025-12-03T14:12:11Z</CreDtTm>
@@ -113,14 +107,12 @@ All XIP-specific fields are placed inside SplmtryData, ensuring zero impact on c
     </SplmtryData>
   </CdtTrfTxInf>
 </FIToFICstmrCdtTrf>
+Design principle:
+XIP metadata is embedded without altering ISO 20022 payment structures.
 
+7. Verification Process
 
-Key principle:
-All XIP metadata resides exclusively in SplmtryData, leaving the ISO 20022 financial payload untouched.
-
-7. Verification Flow
-
-To verify a XIP → ISO 20022 export:
+To verify an ISO 20022 message containing XIP data:
 
 Extract SplmtryData
 
@@ -138,15 +130,15 @@ Offline transaction history
 
 Multi-device receipt merges
 
-Welfare and subsidy disbursements
+Welfare and subsidy payments
 
 CBDC and stablecoin settlement evidence
 
 Merchant and government audit trails
 
-8. XRPL and Distributed Ledger Alignment (Non-Normative)
+8. Distributed Ledger Alignment (Non-Normative)
 
-XIP supports optional linkage to distributed ledgers such as the XRP Ledger (XRPL) via the ledger_ref field.
+XIP supports optional linkage to distributed ledgers, including the XRP Ledger (XRPL), via the ledger_ref field.
 
 Where used:
 
@@ -154,48 +146,61 @@ ISO 20022 handles institutional messaging
 
 XIP provides tamper-proof event evidence
 
-XRPL supplies final settlement or notarization
+Distributed ledgers provide settlement or notarisation
 
-This separation ensures:
+Ledger usage is:
 
-No ledger dependency for ISO compliance
+Optional
 
-Ledger-agnostic operation
+Non-mandatory
 
-Regulator-controlled settlement choices
+Ledger-agnostic
 
-Clean interoperability with Ripple-compatible infrastructures
-
-Ledger integration is optional, non-mandatory, and does not alter ISO 20022 semantics.
+Regulator-controlled
 
 9. Benefits of ISO 20022 Integration
 
-Compatible with all global financial rails
+Compatible with global financial rails
 
-Requires zero changes to banking infrastructure
+No changes required to banking infrastructure
 
 Supports CBDCs and regulated stablecoins
 
-Preserves XIP’s tamper-proof audit chain
+Preserves XIP audit-chain integrity
 
 Enables cross-border regulatory reporting
 
-Bridges offline-audited actions to online settlement
+Bridges offline activity with online settlement
 
 10. Conclusion
 
-XIP integrates seamlessly with ISO 20022 using the SplmtryData extension mechanism.
+XIP integrates with ISO 20022 using the standard SplmtryData extension mechanism.
 
-This design enables offline-first, cryptographically verifiable receipts to be exported directly into existing global financial and regulatory systems without infrastructure modification.
+This enables offline-first, cryptographically verifiable receipts to be exported directly into existing global financial and regulatory systems without infrastructure modification.
 
 This mapping is foundational for:
-
-CBDC and stablecoin issuers
 
 Government payment platforms
 
 National financial infrastructures
 
+CBDC and stablecoin issuers
+
 Financial regulators and auditors
 
 Cross-border compliance systems
+---
+
+### Now do this in nano
+1. **Ctrl + A** (select all)
+2. **Paste** the above
+3. **Ctrl + O** → Enter
+4. **Ctrl + X**
+
+Then commit:
+
+```bash
+git add docs/standards-pack/03-XIP-ISO20022-Mapping.md
+git commit -m "Rewrite ISO 20022 mapping to final aligned standard"
+git push
+
