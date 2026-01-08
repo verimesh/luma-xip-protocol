@@ -124,6 +124,12 @@ consensus ledger, blockchain, or central bank digital currency (CBDC) system.
 XIP does not define monetary policy, settlement logic, or issuance semantics,
 and does not replace or interfere with existing financial or central banking
 infrastructure.
+XIP does not require, mandate, or assume the use of biometric identifiers,
+facial recognition, or centralized identity systems. Device and actor
+identifiers used within receipts are pseudonymous, non-biometric, and scoped
+solely to technical verification and audit continuity. Any association between
+a receipt and a real-world identity is defined externally by the adopting
+authority and applicable law, not by the XIP standard itself.
 
 ---
 
