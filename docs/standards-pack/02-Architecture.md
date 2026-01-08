@@ -130,6 +130,12 @@ identifiers used within receipts are pseudonymous, non-biometric, and scoped
 solely to technical verification and audit continuity. Any association between
 a receipt and a real-world identity is defined externally by the adopting
 authority and applicable law, not by the XIP standard itself.
+XIP does not perform surveillance, behavioural profiling, or population-level
+monitoring. Receipt generation is event-scoped and purpose-bound, and does not
+enable continuous tracking, inference, or automated decision-making about
+individual behaviour. Any aggregation, analytics, or monitoring functions are
+explicitly external to the XIP standard and remain the responsibility of the
+adopting system and governing authority.
 
 ---
 
